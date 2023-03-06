@@ -480,7 +480,7 @@ push(GunConn, DeviceId, HeadersMap, Notification, Timeout) ->
         {ok, Body} = gun:await_body(GunConn, StreamRef, Timeout),
         DecodedBody = jsx:decode(Body, [{return_maps, false}]),
         {Status, ResponseHeaders, DecodedBody};
-      {error, timeout} -> timeout
+      {error, timeout} -> timeout;
       {error, {closed, _}} -> closed
   end.
 
