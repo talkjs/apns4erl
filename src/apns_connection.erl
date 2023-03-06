@@ -481,6 +481,7 @@ push(GunConn, DeviceId, HeadersMap, Notification, Timeout) ->
         DecodedBody = jsx:decode(Body, [{return_maps, false}]),
         {Status, ResponseHeaders, DecodedBody};
       {error, timeout} -> timeout
+      {error, {closed, _}} -> closed
   end.
 
 -spec backoff(non_neg_integer(), non_neg_integer()) -> non_neg_integer().
