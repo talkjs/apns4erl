@@ -226,7 +226,7 @@ open_connection(internal, _, #{connection := Connection} = StateData) ->
 open_origin(internal, _, #{connection := Connection} = StateData) ->
   Host = host(Connection),
   Port = port(Connection),
-  TransportOpts = transport_opts(Connection),
+  #{tls_opts := TransportOpts } = Connection,
   {next_state, open_common, StateData,
     {next_event, internal, { Host
                            , Port
